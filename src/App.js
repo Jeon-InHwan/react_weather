@@ -5,8 +5,6 @@ import { darkTheme, lightTheme } from "./theme";
 import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "./atoms";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import { fetchTokyo } from "./api";
-import { useQuery } from "react-query";
 
 // Reset CSS for removing default browser styles
 const GlobalStyle = createGlobalStyle`
@@ -72,22 +70,6 @@ a {
 
 function App() {
   const isDark = useRecoilValue(isDarkAtom);
-
-  const BASE_URL = `https://api.openweathermap.org/data/2.5`;
-
-  console.log(
-    `${BASE_URL}/weather?q=tokyo&appid=${process.env.REACT_APP_API_KEY}`
-  );
-
-  const { isLoading, data } = useQuery(
-    ["weather", "tokyo"],
-    () => fetchTokyo(),
-    {
-      refetchInterval: 60000,
-    }
-  );
-
-  console.log(data);
 
   return (
     <>
