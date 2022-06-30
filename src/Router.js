@@ -1,11 +1,12 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Header from "./Components/Header";
 
 function Router() {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/">
-          <h1>Hey</h1>
+          <Header />
         </Route>
       </Switch>
     </BrowserRouter>

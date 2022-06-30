@@ -83,7 +83,7 @@ function App() {
     ["weather", "tokyo"],
     () => fetchTokyo(),
     {
-      refetchInterval: 10000,
+      refetchInterval: 60000,
     }
   );
 
