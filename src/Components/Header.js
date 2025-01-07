@@ -10,17 +10,19 @@ const TitleWrapper = styled.div`
   margin: 0 auto;
   display: flex;
   text-align: center;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Title = styled.h1`
   display: inline-block;
   margin-top: 50px;
   font-weight: 700;
-  font-size: 48px;
+  font-size: 36px;
 `;
 
 const ButtonWrapper = styled.div`
-  padding-top: 50px;
+  padding-top: 70px;
   width: 580px;
   margin: 0 auto;
   display: grid;
@@ -53,7 +55,7 @@ function Header() {
   return (
     <>
       <TitleWrapper>
-        <Title>Weather Information with React</Title>
+        <Title>Weather Information</Title>
       </TitleWrapper>
       <ButtonWrapper>
         {showSeoul ? (
