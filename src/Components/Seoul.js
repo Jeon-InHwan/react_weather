@@ -28,10 +28,10 @@ const WeatherWrapper = styled.div`
 const Box = styled.div`
   color: black;
   height: 80px;
-  margin-top: 40px;
+  margin-top: 20px;
   border: none;
   border-radius: 10px;
-  background-color: #c6dbda;
+  background-color: #dbdbdc;
   text-align: center;
   padding: 20px 10px;
   display: grid;
@@ -39,6 +39,11 @@ const Box = styled.div`
   gap: 6px;
   align-items: center;
   justify-content: center;
+  &:hover {
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
 `;
 
 const Loader = styled.span`
@@ -145,7 +150,7 @@ function Seoul() {
             <FontAwesomeIcon
               icon={faDroplet}
               size="2x"
-              style={{ color: "#55CBCD" }}
+              style={{ color: "#007acc" }}
             />
             <TextInfoWrapper>{seoulData?.main?.humidity} %</TextInfoWrapper>
           </IconWrapper>

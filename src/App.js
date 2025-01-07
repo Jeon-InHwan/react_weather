@@ -43,6 +43,7 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   background-color: ${(props) => props.theme.bgColor};
   color: ${(props) => props.theme.textColor};
+  padding-bottom: 80px;
 }
 menu, ol, ul {
   list-style: none;
