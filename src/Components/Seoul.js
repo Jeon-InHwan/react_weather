@@ -12,6 +12,10 @@ import {
   faDroplet,
   faTemperatureHalf,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
+import WeatherForcastChart from "./WeatherForcastChart";
+import HumidityForcastChart from "./HumidityForcastChart";
+import TempForcastChart from "./TempForcastChart";
 
 var randomColor = require("randomcolor");
 
@@ -22,10 +26,10 @@ const WeatherWrapper = styled.div`
   justify-content: center;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  padding-top: 100px;
+  padding-top: 80px;
 `;
 
-const Box = styled.div`
+const Box = styled(Link)`
   color: black;
   height: 80px;
   margin-top: 20px;
@@ -80,6 +84,17 @@ function Seoul() {
 
   console.dir(seoulData);
 
+  /*
+  const { isLoadingForcast, data: seoulDataForcast } = useQuery(
+    ["weather forcast", "seoul forcast"],
+    () => fetchSeoulForcast(),
+    {
+      refetchInterval: 60000,
+    }
+  );
+
+  console.dir(seoulDataForcast);
+    */
   let icon;
   let weatherIconColor;
   let tempIconColor;
@@ -123,58 +138,71 @@ function Seoul() {
   handleComparison(seoulData?.main?.temp - 273.15);
 
   return (
-    <WeatherWrapper>
-      <Box>
-        {isLoading ? (
-          <Loader>
-            <TailSpin height="40" width="40" color={randomColor()}></TailSpin>
-          </Loader>
-        ) : (
-          <IconWrapper>
-            <FontAwesomeIcon
-              icon={icon}
-              size="2x"
-              style={{ color: weatherIconColor }}
-            />
-            <TextInfoWrapper>{seoulData?.weather[0]?.main} </TextInfoWrapper>
-          </IconWrapper>
-        )}
-      </Box>
-      <Box>
-        {isLoading ? (
-          <Loader>
-            <TailSpin height="40" width="40" color={randomColor()}></TailSpin>
-          </Loader>
-        ) : (
-          <IconWrapper>
-            <FontAwesomeIcon
-              icon={faDroplet}
-              size="2x"
-              style={{ color: "#007acc" }}
-            />
-            <TextInfoWrapper>{seoulData?.main?.humidity} %</TextInfoWrapper>
-          </IconWrapper>
-        )}
-      </Box>
-      <Box>
-        {isLoading ? (
-          <Loader>
-            <TailSpin height="40" width="40" color={randomColor()}></TailSpin>
-          </Loader>
-        ) : (
-          <IconWrapper>
-            <FontAwesomeIcon
-              icon={faTemperatureHalf}
-              size="2x"
-              style={{ color: tempIconColor }}
-            />
-            <TextInfoWrapper>
-              {(seoulData?.main?.temp - 273.15).toFixed(2)} °
-            </TextInfoWrapper>
-          </IconWrapper>
-        )}
-      </Box>
-    </WeatherWrapper>
+    <>
+      <WeatherWrapper>
+        <Box to="/seoul/weather">
+          {isLoading ? (
+            <Loader>
+              <TailSpin height="40" width="40" color={randomColor()}></TailSpin>
+            </Loader>
+          ) : (
+            <IconWrapper>
+              <FontAwesomeIcon
+                icon={icon}
+                size="2x"
+                style={{ color: weatherIconColor }}
+              />
+              <TextInfoWrapper>{seoulData?.weather[0]?.main} </TextInfoWrapper>
+            </IconWrapper>
+          )}
+        </Box>
+        <Box to="/seoul/humidity">
+          {isLoading ? (
+            <Loader>
+              <TailSpin height="40" width="40" color={randomColor()}></TailSpin>
+            </Loader>
+          ) : (
+            <IconWrapper>
+              <FontAwesomeIcon
+                icon={faDroplet}
+                size="2x"
+                style={{ color: "#007acc" }}
+              />
+              <TextInfoWrapper>{seoulData?.main?.humidity} %</TextInfoWrapper>
+            </IconWrapper>
+          )}
+        </Box>
+        <Box to="/seoul/temperature">
+          {isLoading ? (
+            <Loader>
+              <TailSpin height="40" width="40" color={randomColor()}></TailSpin>
+            </Loader>
+          ) : (
+            <IconWrapper>
+              <FontAwesomeIcon
+                icon={faTemperatureHalf}
+                size="2x"
+                style={{ color: tempIconColor }}
+              />
+              <TextInfoWrapper>
+                {(seoulData?.main?.temp - 273.15).toFixed(2)} °
+              </TextInfoWrapper>
+            </IconWrapper>
+          )}
+        </Box>
+      </WeatherWrapper>
+      <Switch>
+        <Route path={"/seoul/weather"}>
+          <WeatherForcastChart />
+        </Route>
+        <Route path={"/seoul/humidity"}>
+          <HumidityForcastChart />
+        </Route>
+        <Route path={"/seoul/temperature"}>
+          <TempForcastChart />
+        </Route>
+      </Switch>
+    </>
   );
 }
 

@@ -15,3 +15,17 @@ export async function fetchSeoul() {
     `${BASE_URL}/weather?q=seoul&appid=${process.env.REACT_APP_API_KEY}`
   ).then((response) => response.json());
 }
+
+export async function fetchSeoulForcast() {
+  await delay(1000);
+  return await fetch(
+    `${BASE_URL}/forecast?q=seoul&cnt=12&appid=${process.env.REACT_APP_API_KEY}`
+  ).then((response) => response.json());
+}
+
+export async function fetchTokyoForcast() {
+  await delay(1000);
+  return await fetch(
+    `${BASE_URL}/forecast?q=tokyo&cnt=12&appid=${process.env.REACT_APP_API_KEY}`
+  ).then((response) => response.json());
+}

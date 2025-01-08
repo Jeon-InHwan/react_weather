@@ -6,6 +6,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isDarkAtom } from "../atoms";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudSun } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 // 켈빈 = (섭씨 + 273.15)
 
@@ -36,8 +37,12 @@ const ButtonWrapper = styled.div`
   gap: 28px;
 `;
 
-const AreaBtn = styled.button`
-  height: 30px;
+const AreaBtn = styled(Link)`
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
   border: none;
   border-radius: 10px;
   background-color: ${(props) => props.theme.cardBgColor}
@@ -101,6 +106,7 @@ function Header() {
         {showSeoul ? (
           <>
             <AreaBtn
+              to="/seoul"
               style={{
                 backgroundColor: "#33adff",
                 border: isDark ? "3px solid white" : "3px solid black",
@@ -110,6 +116,7 @@ function Header() {
               Seoul
             </AreaBtn>
             <AreaBtn
+              to="/tokyo"
               style={{ backgroundColor: "#BEDDF1" }}
               onClick={toggleForArea}
             >
@@ -119,12 +126,14 @@ function Header() {
         ) : (
           <>
             <AreaBtn
+              to="/seoul"
               style={{ backgroundColor: "#BEDDF1" }}
               onClick={toggleForArea}
             >
               Seoul
             </AreaBtn>
             <AreaBtn
+              to="/tokyo"
               style={{
                 backgroundColor: "#33adff",
                 border: isDark ? "3px solid white" : "3px solid black",
