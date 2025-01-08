@@ -55,15 +55,6 @@ function TempForcastChart() {
     ? seoulDataForcast
     : tokyoDataForcast;
 
-  const ApexChartWrapper = styled.div`
-    margin-top: 50px;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  `;
-
   return (
     <div>
       {isLoading ? (
@@ -71,75 +62,81 @@ function TempForcastChart() {
           <TailSpin height="200" width="200" color={randomColor()}></TailSpin>
         </Loader>
       ) : (
-        <ApexChartWrapper>
-          <ApexChart
-            height={400}
-            width={800}
-            type="line"
-            series={[
-              {
-                name: "temperature",
-                data: data?.list.map((info) => info.main?.temp - 273.15) ?? [],
-              },
-            ]}
-            options={{
-              theme: {
-                mode: isDark ? "dark" : "light",
-              },
-              grid: {
+        <ApexChart
+          height={400}
+          width={800}
+          type="line"
+          style={{
+            marginTop: "50px",
+            display: "flex",
+            textAlign: "center",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+          }}
+          series={[
+            {
+              name: "temperature",
+              data: data?.list.map((info) => info.main?.temp - 273.15) ?? [],
+            },
+          ]}
+          options={{
+            theme: {
+              mode: isDark ? "dark" : "light",
+            },
+            grid: {
+              show: false,
+            },
+            chart: {
+              id: "temperatureChart",
+              height: "100%",
+              width: "100%",
+              toolbar: {
                 show: false,
               },
-              chart: {
-                id: "temperatureChart",
-                height: "100%",
-                width: "100%",
-                toolbar: {
-                  show: false,
-                },
-                background: "transparent",
+              background: "transparent",
+            },
+            stroke: {
+              curve: "smooth",
+              width: 5,
+            },
+            yaxis: {
+              labels: {
+                formatter: (value) => `${value.toFixed(2)} °`,
               },
-              stroke: {
-                curve: "smooth",
-                width: 5,
+            },
+            xaxis: {
+              type: "datetime",
+              labels: {
+                show: false,
               },
-              yaxis: {
-                labels: {
-                  formatter: (value) => `${value.toFixed(2)} °`,
-                },
+              categories:
+                data?.list.map((info) =>
+                  moment
+                    .unix(info?.dt)
+                    .add(9, "hours")
+                    .format("YYYY-MM-DD HH:mm:ss")
+                ) ?? [],
+            },
+            fill: {
+              type: "gradient",
+              gradient: {
+                gradientToColors: ["#FEAE19"],
+                stops: [0, 100],
+                type: "vertical",
               },
-              xaxis: {
-                type: "datetime",
-                labels: {
-                  show: false,
-                },
-                categories:
-                  data?.list.map((info) =>
-                    moment
-                      .unix(info?.dt)
-                      .add(9, "hours")
-                      .format("YYYY-MM-DD HH:mm:ss")
-                  ) ?? [],
+            },
+            colors: ["#7C98EC"],
+            tooltip: {
+              y: {
+                formatter: (value) => `${value.toFixed(2)} °`,
               },
-              fill: {
-                type: "gradient",
-                gradient: {
-                  gradientToColors: ["#FEAE19"],
-                  stops: [0, 100],
-                  type: "vertical",
-                },
+              x: {
+                format: "yy/MM/dd HH:mm:ss",
               },
-              colors: ["#7C98EC"],
-              tooltip: {
-                y: {
-                  formatter: (value) => `${value.toFixed(2)} °`,
-                },
-                x: {
-                  format: "yy/MM/dd HH:mm:ss",
-                },
-              },
-            }}
-          />
-        </ApexChartWrapper>
+            },
+          }}
+        />
       )}
     </div>
   );

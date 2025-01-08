@@ -11,7 +11,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 // 켈빈 = (섭씨 + 273.15)
 
 const TitleWrapper = styled.div`
-  padding-top: 6%;
+  padding-top: 4%;
   width: 580px;
   margin: 0 auto;
   display: flex;
@@ -29,7 +29,7 @@ const Title = styled.h1`
 `;
 
 const ButtonWrapper = styled.div`
-  padding-top: 70px;
+  padding-top: 20px;
   width: 580px;
   margin: 0 auto;
   display: grid;

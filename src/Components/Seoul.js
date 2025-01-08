@@ -26,7 +26,7 @@ const WeatherWrapper = styled.div`
   justify-content: center;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  padding-top: 80px;
+  padding-top: 60px;
 `;
 
 const Box = styled(Link)`
